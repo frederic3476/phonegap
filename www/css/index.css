@@ -103,3 +103,58 @@ height: 2em;
 float: left;
 border-radius: 50%;
 }
+
+.screen{
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: O;
+    left: O;
+    background-color: #fff;
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    overflow-y: auto;
+}
+
+.screen>h1{
+    font-size: 1.5em;
+    padding: .5em;
+    text-align: center;
+    background-color: fuchsia;
+    color: #fff; 
+}
+
+.hidden{
+    dislay: none;
+}
+
+.off-screen{
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+}
+
+#contacts-viewer{
+    z-index: 0;
+}
+
+#message-interface{
+    z-index: 5;
+}
+
+#location-map-preview{
+    padding-top: 50%;
+}
+#message-validator{
+    float: right;
+}
+
+#goto-settings{
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: block;
+    width: 3em;
+    height: 3em;
+    background: url(../img/settings.svg) no-repeat center;
+    background-size: contain;
+}

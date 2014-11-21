@@ -32,9 +32,45 @@ var app = {
             document.addEventListener('deviceready', this.onDeviceReady, false);
         }
         else {
-            document.addEventListener("DOMContentLoaded", this.onDOMContentReady, false);
-            
+            document.addEventListener("DOMContentLoaded", this.onDOMContentReady, false);   
         }
+        document.getElementById("contacts-list-validate").addEventListener("click", this.onContactsListValidate, false); 
+        //document.getElementById("get-location").addEventListener("click", this.onGetLocation, false); 
+        //document.getElementById("get-message").addEventListener("click", this.onGetMessage, false);
+        //document.getElementById("get-picture").addEventListener("click", this.onGetPicture, false);
+    },
+    onContactsListValidate: function(){
+      var checked_contacts = document.getElementById("contacts-list").querySelectorAll(".check>input[type='checkbox']:checked");
+      if (!checked_contacts){
+          return false;
+      }
+      
+      var selected_contacts = [];
+      
+      Array.prototype.forEach.call(
+              checked_contacts, function(checkbox){
+                  var id = checkbox.value;
+                  var contact = app.local_contacts[id];
+                  if (!contact) {
+                      return;
+                  }
+                  console.dir(id, contact);
+                  selected_contacts.push(contact);
+              });
+      
+      console.dir(selected_contacts);
+      document.getElementById("message-interface").classList.remove("off-screen");        
+      
+      //GEOLOCALISATION  
+      if (navigator.geolocation) {
+          app.startLocation();
+          document.getElementById("get-location").addEventListener("click", app.startLocation, false);
+      }
+      else{
+          document.getElementById("location-map-preview").parentNode.classList.add("hidden");
+      }
+      
+      document.getElementById("message_validate").onclick = app.sendSMSToContacts.bind(null, selected_contacts);
     },
     defaultContents: {
         contacts: [
@@ -50,6 +86,12 @@ var app = {
                         type: "url",
                         value: "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg"
                     }
+                ],
+                phoneNumbers: [
+                    {
+                        type: "Mobile",
+                        value: "0616968210"
+                    }
                 ]
             },
             {
@@ -59,6 +101,12 @@ var app = {
                     {
                         type: "url",
                         value: "https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg"
+                    }
+                ],
+                phoneNumbers: [
+                    {
+                        type: "Work",
+                        value: "0616968210"
                     }
                 ]
             },
@@ -97,14 +145,27 @@ var app = {
         console.log('Received Event: ' + id);
     },
     onContactFindSuccess: function(contacts) {
-        console.dir(contacts);
+        app.local_contacts = {};
         var contacts_list = document.getElementById("contacts-list");
         contacts_list.innerHTML = "";
         contacts_str = new Array(); 
         contacts.forEach(function(contact) {
+            if (!contact.phoneNumbers || !contact.phoneNumbers.forEach){
+                return;
+            }
+                
             if (!contact.displayName && !contact.nickname && (!contact.name || !contact.name.formatted)) {
                 return; 
             }
+            
+            var pref_number = app.getPrefferedOrfirst(contact.phoneNumbers, function(phone_number){
+                return phone_number.type.toLowerCase() === "mobile";
+            });
+            
+            if (!pref_number){
+                return;
+            }
+            
             contacts_str.push("<li>\
                     <a onclick=\"alert('ok'+this.querySelector('h2').textContent+'fin')\" href=\"#contact-" + contact.id + "\" class=\"contact\">");
             if (contact.photos && contact.photos[0]) {
@@ -117,10 +178,12 @@ var app = {
                     break;
                 }
             }
-            contacts_str.push("<h2>" + (contact.displayName || contact.nickname || contact.name.formatted).sanitize()) + "</h2>\
+            contacts_str.push("<h2>" + (contact.displayName || contact.nickname || contact.name.formatted).sanitize() + (contact.phoneNumbers[0] ? contact.phoneNumbers[0].value + contact.phoneNumbers[0].type : "") + "</h2>\
                     </a>\
-                    <label class=\"check\"><input type=\"checkbox\" name=\"\" id=\"contact-" + contact.id + "\" /></label>\
+                    <label class=\"check\"><input value=\"" + contact.id + "\" type=\"checkbox\" name=\"\" id=\"contact[" + contact.id + "]\" /></label>\
                 </li>");
+                    
+             app.local_contacts[contact.id] = contact;       
         });
         contacts_list.innerHTML = contacts_str.join("");
         
@@ -135,6 +198,102 @@ var app = {
     },
     onContactFindError: function(error) {
         console.dir(error);
+    },
+    startLocation: function(){
+    navigator.geolocation.getCurrentPosition(app.onLocationSuccess, app.onLocationError,
+                                                    { 
+                                                        enableHighAccuracy: true,
+                                                        timeout: 10000,
+                                                        maximumAge: 5000
+                                                    }
+                                                    );
+                                         
+    },
+    onLocationSuccess: function (position){
+        var map = document.getElementById("location-map-preview");
+        map.classList.remove("hidden");
+        console.dir(position);       
+        map.style.backgroundImage = "url(https://maps.googleapis.com/maps/api/staticmap?center="+position.coords.latitude+","+position.coords.longitude+"&zoom=13&size="+map.offsetWidth+"x"+map.offsetHeight+"&maptype=roadmap&markers=color:blue%7Clabel:S%7C"+position.coords.latitude+","+position.coords.longitude+")";
+        map.dataset.latitude =   position.coords.latitude;
+        map.dataset.longitude =   position.coords.longitude;
+    },
+    onLocationError: function (){
+        document.getElementById("location-map-preview").classList.add("hidden");
+        alert('error location');
+    },
+    sendSMSToContacts: function(selected_contacts) {
+      
+      var location_map = document.getElementById("location-map-preview");
+      if (!location_map.classList.contains("hidden") && !location_map.parentNode.classList.contains("hidden")){
+          var location = location_map.dataset;
+      }
+      
+      var message = document.getElementById("message-zone").value;
+      if (!sms){
+          alert("SMS plugin is not ready");
+          return;
+      }
+      
+      var selected_numbers = [];
+      
+      selected_contacts.forEach(function(contact){
+           
+          if (!contact.phoneNumbers || !contact.phoneNumbers.forEach){
+              return;
+          }
+          
+          var pref_number = app.getPrefferedOrfirst(contact.phoneNumbers,
+          function(phone_number){
+              return phone_number.type.toLowerCase() === "mobile";
+          });
+          if (pref_number) {
+              selected_numbers.push(app.cleanPhoneNumber(pref_number.value));
+          };          
+      });
+      
+      alert("sms send to " +selected_numbers[0] +"!!!!");
+      var messageInfo = {
+            phoneNumber: selected_numbers[0],
+            textMessage: (message || "Aperoooo!!!")
+      };
+      sms.send(selected_numbers[0], (message || "Aperoooo!!!"),"INTENT",
+      function(){
+          console.info("SMS success");
+          alert("SMS success");
+      }, 
+      function (error) {
+          console.error(error);
+          alert("SMS error");
+      }
+      );
+    },
+    
+    getPrefferedOrfirst: function(list, customFilter){
+        if (!list || !list.length){
+            return;
+        }
+        
+        if (customFilter){
+            list = list.filter(customFilter);
+            if (!list || !list.length){
+                return;
+            }
+        }
+        
+        for (var i=0, nb=list.length;i<nb;i++){
+            if(list[i].pref) {
+                return list[i];
+            }
+        }
+        
+        return list[0];
+    },
+    
+    cleanPhoneNumber: function (number){
+        return nb.trim().split(" ").map(function (part) {
+        return part.trim();
+    }).join("");
     }
 };
+    
 app.initialize();

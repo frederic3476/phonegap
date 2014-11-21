@@ -29,7 +29,9 @@
         <title>Hello World</title>
     </head>
     <body>
-        <main id="contacts-viewer">
+        <main id="contacts-viewer" class="screen">
+            <h1>Choisissez vos contacts</h1>
+               
             <ul id="contacts-list">
                 <li>
                     <a href="#0" class="contact"><h2>Contact n°1</h2></a>
@@ -56,9 +58,40 @@
                 <button id="contacts-list-validate">Aperooooo!!!!</button>
             </div>
         </main>
+        <div id="message-interface" class="screen off-screen">
+            <h1>Envoyez vore message</h1>
+            <div id="message-interface-content">
+                <div>
+                    <ul>
+                        
+                    </ul>
+                </div>
+                <div>
+                    <h2>Localisation</h2>
+                    <button id="get-location">Me localiser</button>
+                    <div id="location-map-preview"></div>
+                </div>
+                
+                <div>
+                    <h2>Message</h2>
+                    <button id="get-message">Message par défaut</button>
+                    <textarea cols="50" rows="5" id="message-zone"></textarea>
+                </div>
+                
+                <div>
+                    <h2>Photo</h2>
+                    <button id="get-picture">Prendre une photo</button>
+                    <div id="picture-preview"></div>
+                </div>    
+            </div>
+            <div id ="message-validator">
+                <button id="message_validate">Envoyez</button>
+            </div>
+        </div>
         
         <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="prototype.js"></script>
+        <script type="text/javascript" src="js/prototype.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/settings.js"></script>
     </body>
 </html>

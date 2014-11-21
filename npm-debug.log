@@ -1,0 +1,141 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   '-g',
+1 verbose cli   'vs-mda-remote',
+1 verbose cli   '--user=$USER' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.33
+4 verbose node symlink C:\Program Files\nodejs\\node.exe
+5 verbose cache add [ 'vs-mda-remote', null ]
+6 verbose cache add name=undefined spec="vs-mda-remote" args=["vs-mda-remote",null]
+7 verbose parsed url { protocol: null,
+7 verbose parsed url   slashes: null,
+7 verbose parsed url   auth: null,
+7 verbose parsed url   host: null,
+7 verbose parsed url   port: null,
+7 verbose parsed url   hostname: null,
+7 verbose parsed url   hash: null,
+7 verbose parsed url   search: null,
+7 verbose parsed url   query: null,
+7 verbose parsed url   pathname: 'vs-mda-remote',
+7 verbose parsed url   path: 'vs-mda-remote',
+7 verbose parsed url   href: 'vs-mda-remote' }
+8 silly lockFile b980c61c-vs-mda-remote vs-mda-remote
+9 verbose lock vs-mda-remote C:\Users\teissier\AppData\Roaming\npm-cache\b980c61c-vs-mda-remote.lock
+10 silly lockFile b980c61c-vs-mda-remote vs-mda-remote
+11 silly lockFile b980c61c-vs-mda-remote vs-mda-remote
+12 verbose addNamed [ 'vs-mda-remote', '' ]
+13 verbose addNamed [ null, '*' ]
+14 silly lockFile ed5184f7-vs-mda-remote vs-mda-remote@
+15 verbose lock vs-mda-remote@ C:\Users\teissier\AppData\Roaming\npm-cache\ed5184f7-vs-mda-remote.lock
+16 silly addNameRange { name: 'vs-mda-remote', range: '*', hasData: false }
+17 verbose request where is /vs-mda-remote
+18 verbose request registry https://registry.npmjs.org/
+19 verbose request id c74cf5eb3ef4856f
+20 verbose url raw /vs-mda-remote
+21 verbose url resolving [ 'https://registry.npmjs.org/', './vs-mda-remote' ]
+22 verbose url resolved https://registry.npmjs.org/vs-mda-remote
+23 verbose request where is https://registry.npmjs.org/vs-mda-remote
+24 info trying registry request attempt 1 at 15:25:36
+25 http GET https://registry.npmjs.org/vs-mda-remote
+26 http 200 https://registry.npmjs.org/vs-mda-remote
+27 silly registry.get cb [ 200,
+27 silly registry.get   { date: 'Wed, 19 Nov 2014 14:25:36 GMT',
+27 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+27 silly registry.get     etag: '"DZ9C3DXKKEWHOXK6BG7OUHVZ7"',
+27 silly registry.get     'content-type': 'application/json',
+27 silly registry.get     'cache-control': 'max-age=60',
+27 silly registry.get     'content-length': '27350',
+27 silly registry.get     'accept-ranges': 'bytes',
+27 silly registry.get     via: '1.1 varnish',
+27 silly registry.get     age: '0',
+27 silly registry.get     'x-served-by': 'cache-lhr6330-LHR',
+27 silly registry.get     'x-cache': 'MISS',
+27 silly registry.get     'x-cache-hits': '0',
+27 silly registry.get     'x-timer': 'S1416407136.179862,VS0,VE783',
+27 silly registry.get     vary: 'Accept',
+27 silly registry.get     'keep-alive': 'timeout=10, max=50',
+27 silly registry.get     connection: 'Keep-Alive' } ]
+28 silly addNameRange number 2 { name: 'vs-mda-remote', range: '*', hasData: true }
+29 silly addNameRange versions [ 'vs-mda-remote',
+29 silly addNameRange   [ '0.1.0', '0.1.1', '0.1.2', '0.2.0', '0.2.1', '0.2.4', '0.2.5' ] ]
+30 verbose addNamed [ 'vs-mda-remote', '0.2.5' ]
+31 verbose addNamed [ '0.2.5', '0.2.5' ]
+32 silly lockFile 6db90d01-vs-mda-remote-0-2-5 vs-mda-remote@0.2.5
+33 verbose lock vs-mda-remote@0.2.5 C:\Users\teissier\AppData\Roaming\npm-cache\6db90d01-vs-mda-remote-0-2-5.lock
+34 silly lockFile 585c945e-a-remote-vs-mda-remote-0-2-5-tgz https://registry.npmjs.org/vs-mda-remote/-/vs-mda-remote-0.2.5.tgz
+35 verbose lock https://registry.npmjs.org/vs-mda-remote/-/vs-mda-remote-0.2.5.tgz C:\Users\teissier\AppData\Roaming\npm-cache\585c945e-a-remote-vs-mda-remote-0-2-5-tgz.lock
+36 verbose addRemoteTarball [ 'https://registry.npmjs.org/vs-mda-remote/-/vs-mda-remote-0.2.5.tgz',
+36 verbose addRemoteTarball   '3057670211f586283384d45565d44147801e63ce' ]
+37 info retry fetch attempt 1 at 15:25:37
+38 verbose fetch to= C:\Users\teissier\AppData\Local\Temp\npm-4828-vWIF4mko\registry.npmjs.org\vs-mda-remote\-\vs-mda-remote-0.2.5.tgz
+39 http GET https://registry.npmjs.org/vs-mda-remote/-/vs-mda-remote-0.2.5.tgz
+40 http 200 https://registry.npmjs.org/vs-mda-remote/-/vs-mda-remote-0.2.5.tgz
+41 silly lockFile 585c945e-a-remote-vs-mda-remote-0-2-5-tgz https://registry.npmjs.org/vs-mda-remote/-/vs-mda-remote-0.2.5.tgz
+42 silly lockFile 585c945e-a-remote-vs-mda-remote-0-2-5-tgz https://registry.npmjs.org/vs-mda-remote/-/vs-mda-remote-0.2.5.tgz
+43 silly lockFile 6db90d01-vs-mda-remote-0-2-5 vs-mda-remote@0.2.5
+44 silly lockFile 6db90d01-vs-mda-remote-0-2-5 vs-mda-remote@0.2.5
+45 silly lockFile ed5184f7-vs-mda-remote vs-mda-remote@
+46 silly lockFile ed5184f7-vs-mda-remote vs-mda-remote@
+47 silly resolved [ { name: 'vs-mda-remote',
+47 silly resolved     description: 'OSX agent to remotely build, run, and debug iOS apps created using Visual Studio Tools for Apache Cordova.',
+47 silly resolved     version: '0.2.5',
+47 silly resolved     author:
+47 silly resolved      { name: 'Microsoft Corporation',
+47 silly resolved        email: 'multidevicehybridapp@microsoft.com' },
+47 silly resolved     homepage: 'http://msdn.microsoft.com/en-us/vstudio/dn722381',
+47 silly resolved     main: './lib/server.js',
+47 silly resolved     bin: { 'vs-mda-remote': './bin/vs-mda-remote' },
+47 silly resolved     os: [ 'darwin' ],
+47 silly resolved     preferGlobal: true,
+47 silly resolved     dependencies:
+47 silly resolved      { cordova: '4.0.0',
+47 silly resolved        express: '3.4.8',
+47 silly resolved        request: '2.36.0',
+47 silly resolved        tar: '0.1.20',
+47 silly resolved        fstream: '0.1.28',
+47 silly resolved        'zip-stream': '0.2.3',
+47 silly resolved        nconf: '0.6.9',
+47 silly resolved        q: '1.0.1',
+47 silly resolved        elementtree: '0.1.6',
+47 silly resolved        semver: '2.3.1',
+47 silly resolved        optimist: '0.6.1',
+47 silly resolved        rimraf: '2.2.6',
+47 silly resolved        mkdirp: '0.3.5',
+47 silly resolved        ncp: '0.5.1',
+47 silly resolved        'plist-with-patches': '0.5.1',
+47 silly resolved        'ios-sim': '2.0.1' },
+47 silly resolved     devDependencies: { nodeunit: '0.8.7', assert: '1.1.1' },
+47 silly resolved     scripts:
+47 silly resolved      { test: 'nodeunit test',
+47 silly resolved        preinstall: 'ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)";  ((brew install libimobiledevice && brew install --HEAD ideviceinstaller && brew install ios-webkit-debug-proxy) || (echo "Error installing Homebrew or dependencies. Please install Homebrew manually first or install vs-mda-remote using the following command:\n\tsudo npm install -g vs-mda-remote --user=\\$USER\n" && exit 1)) && echo "Enabling Developer mode on Mac. Enter an administrator password if prompted." && (DevToolsSecurity -enable || true)' },
+47 silly resolved     directories: { lib: 'lib', doc: '.', test: 'test', example: 'examples' },
+47 silly resolved     _id: 'vs-mda-remote@0.2.5',
+47 silly resolved     _shasum: '3057670211f586283384d45565d44147801e63ce',
+47 silly resolved     _resolved: 'https://registry.npmjs.org/vs-mda-remote/-/vs-mda-remote-0.2.5.tgz',
+47 silly resolved     _from: 'vs-mda-remote@',
+47 silly resolved     _npmVersion: '1.4.28',
+47 silly resolved     _npmUser:
+47 silly resolved      { name: 'multidevicehybridapp',
+47 silly resolved        email: 'multidevicehybridapp@microsoft.com' },
+47 silly resolved     maintainers: [ [Object] ],
+47 silly resolved     dist:
+47 silly resolved      { shasum: '3057670211f586283384d45565d44147801e63ce',
+47 silly resolved        tarball: 'http://registry.npmjs.org/vs-mda-remote/-/vs-mda-remote-0.2.5.tgz' } } ]
+48 info install vs-mda-remote@0.2.5 into C:\Users\teissier\AppData\Roaming\npm
+49 info installOne vs-mda-remote@0.2.5
+50 error notsup Unsupported
+50 error notsup Not compatible with your operating system or architecture: vs-mda-remote@0.2.5
+50 error notsup Valid OS:    darwin
+50 error notsup Valid Arch:  any
+50 error notsup Actual OS:   win32
+50 error notsup Actual Arch: x64
+51 error System Windows_NT 6.2.9200
+52 error command "C:\\Program Files\\nodejs\\\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "-g" "vs-mda-remote" "--user=$USER"
+53 error cwd C:\Users\teissier\hello
+54 error node -v v0.10.33
+55 error npm -v 1.4.28
+56 error code EBADPLATFORM
+57 verbose exit [ 1, true ]
