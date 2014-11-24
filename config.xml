@@ -9,4 +9,13 @@
     </author>
     <content src="index.html" />
     <access origin="*" />
+    <preference name="SplashScreen" value="foo" />
+    <preference name="SplashScreenDelay" value="10000" />
+    <preference name="AutoHideSplashScreen" value="false" />
+    <platform name="wp8">
+              <icon src="www/res/wp/beer.png" width="99" height="99" />
+              <!-- tile image -->
+              <icon src="www/res/wp/beer-large.jpg" width="159" height="159" />
+              <splash src="www/res/screens/wp8/SplashScreenImage.jpg" width="480" height="800"/>
+     </platform>
 </widget>

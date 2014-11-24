@@ -16,6 +16,8 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
+
 var app = {
     isPhoneGapApp: !!window.cordova,
     
@@ -35,10 +37,17 @@ var app = {
             document.addEventListener("DOMContentLoaded", this.onDOMContentReady, false);   
         }
         document.getElementById("contacts-list-validate").addEventListener("click", this.onContactsListValidate, false); 
-        //document.getElementById("get-location").addEventListener("click", this.onGetLocation, false); 
-        //document.getElementById("get-message").addEventListener("click", this.onGetMessage, false);
-        //document.getElementById("get-picture").addEventListener("click", this.onGetPicture, false);
+        document.getElementById("get-picture").addEventListener("click", this.onPictureValidate, false); 
+
     },
+    onPictureValidate: function(){
+        navigator.camera.getPicture(app.onPictureSuccess, app.onPictureFail, { 
+            quality: 50,
+            destinationType: Camera.DestinationType.FILE_URI,
+            targetWidth: 300,
+            targetHeight: 300,
+            saveToPhotoAlbum: false });
+         },
     onContactsListValidate: function(){
       var checked_contacts = document.getElementById("contacts-list").querySelectorAll(".check>input[type='checkbox']:checked");
       if (!checked_contacts){
@@ -129,12 +138,29 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
+        
+        /*if(splashscreen){
+            splashscreen.show();
+        }
+        if(splashscreen){
+            setTimeout(function() {
+                splashscreen.hide();
+            }, 2000);
+        }*/
         app.receivedEvent('deviceready');
         var options      = new ContactFindOptions();
         options.filter   = "";
         options.multiple = true;
         var fields       = [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
         navigator.contacts.find(fields, app.onContactFindSuccess, app.onContactFindError, options);
+    },
+    onPictureSuccess: function(imageURI){
+        alert(imageURI);
+        var image = document.getElementById('myImage');
+        image.src = imageURI;
+    },
+    onPictureFail: function(message){
+        alert('Failed because: ' + message);
     },
     onDOMContentReady: function() {
         app.receivedEvent('DOMContentLoaded');
@@ -228,6 +254,7 @@ var app = {
           var location = location_map.dataset;
       }
       
+     
       var message = document.getElementById("message-zone").value;
       if (!sms){
           alert("SMS plugin is not ready");
@@ -246,8 +273,9 @@ var app = {
           function(phone_number){
               return phone_number.type.toLowerCase() === "mobile";
           });
+          
           if (pref_number) {
-              selected_numbers.push(app.cleanPhoneNumber(pref_number.value));
+              //selected_numbers.push(app.cleanPhoneNumber(pref_number.value));
           };          
       });
       
@@ -256,6 +284,8 @@ var app = {
             phoneNumber: selected_numbers[0],
             textMessage: (message || "Aperoooo!!!")
       };
+      
+      alert("go"+selected_numbers[0]);
       sms.send(selected_numbers[0], (message || "Aperoooo!!!"),"INTENT",
       function(){
           console.info("SMS success");
